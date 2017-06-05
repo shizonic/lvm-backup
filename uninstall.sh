@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# disable systemd timer
-systemctl disable backup-cleanup.timer
+# stop & disable systemd timer
+systemctl stop backup-cleanup.timer && systemctl disable backup-cleanup.timer
 
 # remove backup and cleanup scripts
 rm -rf /mnt/data/backup/scripts

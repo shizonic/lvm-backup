@@ -8,5 +8,5 @@ install --mode=744 scripts/* /mnt/data/backup/scripts/
 install --mode=644 systemd/* /etc/systemd/system/
 systemctl daemon-reload
 
-# enable systemd timer
+# enable & start systemd timer
 systemctl enable backup-cleanup.timer && systemctl start backup-cleanup.timer
