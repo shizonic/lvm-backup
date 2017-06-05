@@ -9,4 +9,4 @@ install --mode=644 systemd/* /etc/systemd/system/
 systemctl daemon-reload
 
 # enable systemd timer
-systemctl enable backup-cleanup.timer
+systemctl enable backup-cleanup.timer && systemctl start backup-cleanup.timer
