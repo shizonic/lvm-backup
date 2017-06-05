@@ -15,6 +15,7 @@ SNAPSHOTS=$(lvs | awk '/root_/ {print}') # get snapshots of root partition
 SNAPSHOT_NAMES=( $(printf '%s' "${SNAPSHOTS[@]}" | awk '/root_/ {print $1}') )
 SNAPSHOTS_SIZE=$(printf '%s\n' "${SNAPSHOTS[@]}" | awk '/root_/ {size = size + substr($4, 0, 5)} END {print size}')
 
+# remove oldest snapshot if summarized size of all snapshots is greater than max size
 echo "Checking maximum size ..."
 if (( $(echo "$SNAPSHOTS_SIZE > $MAX_SIZE" | bc -l) )); then
 	echo "Removing snapshot... ${SNAPSHOT_NAMES[0]}"
@@ -30,6 +31,7 @@ SNAPSHOTS=$(lvs | awk '/root_/ {print}') # get snapshots of root partition
 SNAPSHOT_NAMES=( $(printf '%s' "${SNAPSHOTS[@]}" | awk '/root_/ {print $1}') )
 SNAPSHOT_DATES=$(printf '%s\n' "${SNAPSHOTS[@]}" | grep -Po '(?<=root_)([0-9]{4}-[0-9]{2}-[0-9]{2})')
 
+# remove all snapshots which are older than max age
 echo "Checking maximum age ..."
 for SNAPSHOT_DATE in $SNAPSHOT_DATES; do
 	TODAY_TIMESTAMP=$(date +%s)
