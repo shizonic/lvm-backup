@@ -1,0 +1,9 @@
+[Unit]
+Description=Daily trigger for the backup / cleanup service
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target
