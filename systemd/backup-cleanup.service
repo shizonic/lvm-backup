@@ -1,0 +1,8 @@
+[Unit]
+Description=Handles the creation and cleanup of root LVM partition snapshots
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/mnt/data/backup/scripts/backup.sh
+ExecStart=/mnt/data/backup/scripts/cleanup.sh
